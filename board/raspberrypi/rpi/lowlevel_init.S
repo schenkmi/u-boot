@@ -6,6 +6,8 @@
 
 #include <config.h>
 
+#ifdef CONFIG_BOOT_ATF
+#else
 .align 8
 .global fw_dtb_pointer
 fw_dtb_pointer:
@@ -33,3 +35,4 @@ save_boot_params:
 
 	/* Returns */
 	b	save_boot_params_ret
+#endif
