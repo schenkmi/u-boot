@@ -284,6 +284,12 @@ endmenu		# General setup
 
 menu "Boot images"
 
+
+config BOOT_ATF
+	bool "ARM Trusted FW"
+	help
+	  This option enables ARM Trusted FW
+
 config ANDROID_BOOT_IMAGE
 	bool "Enable support for Android Boot Images"
 	default y if FASTBOOT
