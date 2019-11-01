@@ -6,8 +6,6 @@
 
 #include <config.h>
 
-#ifdef CONFIG_BOOT_ATF
-#else
 .align 8
 .global fw_dtb_pointer
 fw_dtb_pointer:
@@ -17,6 +15,8 @@ fw_dtb_pointer:
 	.word 0x0
 #endif
 
+#ifdef CONFIG_BOOT_ATF
+#else
 /*
  * Routine: save_boot_params (called after reset from start.S)
  * Description: save ATAG/FDT address provided by the firmware at boot time
