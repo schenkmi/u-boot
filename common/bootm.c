@@ -815,7 +815,11 @@ void __weak switch_to_non_secure_mode(void)
 }
 
 #else /* USE_HOSTCC */
-
+/* increase for fit */
+#if 1
+#undef CONFIG_SYS_BOOTM_LEN
+#define CONFIG_SYS_BOOTM_LEN SZ_64M
+#endif
 #if defined(CONFIG_FIT_SIGNATURE)
 static int bootm_host_load_image(const void *fit, int req_image_type)
 {
