@@ -337,13 +337,6 @@ int dram_init_banksize(void)
 #endif
 #endif
 
-ulong board_get_usable_ram_top(ulong total_size)
-{
-	if ((gd->ram_top - boot_r2) > SZ_64M)
-		return gd->ram_top;
-	return boot_r2 & 0xffff0000;
-}
-
 static void set_fdtfile(void)
 {
 	const char *fdtfile;
@@ -375,9 +368,15 @@ static void set_fdt_addr(void)
  */
 unsigned long board_get_usable_ram_top(unsigned long total_size)
 {
+#ifdef CONFIG_BOOT_ATF
+	if ((gd->ram_top - boot_r2) > SZ_64M)
+		return gd->ram_top;
+	return boot_r2 & 0xffff0000;
+#else
 	if ((gd->ram_top - fw_dtb_pointer) > SZ_64M)
 		return gd->ram_top;
 	return fw_dtb_pointer & ~0xffff;
+#endif
 }
 
 static void set_usbethaddr(void)
