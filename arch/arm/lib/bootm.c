@@ -364,7 +364,7 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 	  unsigned long long (*bl31_getspin)(void);
 	  unsigned long long spin_addr;
 
-	  ap = getenv("atf_load_addr");
+	  ap = env_get("atf_load_addr");
 	  if (ap) {
 	    char *ptr;
 	    atf_addr = ustrtoul(ap, &ptr, 16);
@@ -372,7 +372,7 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 	    set_entry_addr = atf_addr + 8;
 	  }
 
-	  ap = getenv("tee_load_addr");
+	  ap = env_get("tee_load_addr");
 	  if (ap) {
 	    char *ptr;
 	    tee_addr = ustrtoul(ap, &ptr, 16);
@@ -387,7 +387,7 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 	  debug("spin_addr: 0x%llx\n", spin_addr);
 	  (*bl31_uboot_set_entries)(saved_kernel_entry, images->ft_addr, 1, tee_addr);
 
-	  ap = getenv("smp");
+	  ap = env_get("smp");
 	  if (ap && (strcmp(ap, "on") == 0)) {
 	    /*
 	      Release spinning cores
