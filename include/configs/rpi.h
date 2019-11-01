@@ -9,6 +9,10 @@
 #include <linux/sizes.h>
 #include <asm/arch/timer.h>
 
+# if 0
+# define DEBUG
+# endif
+
 #if defined(CONFIG_TARGET_RPI_2) || defined(CONFIG_TARGET_RPI_3_32B)
 #define CONFIG_SKIP_LOWLEVEL_INIT
 #endif
@@ -58,6 +62,12 @@
 #ifdef CONFIG_ARM64
 #define CONFIG_SYS_BOOTM_LEN		SZ_64M
 #endif
+
+
+#define CONFIG_CMD_BOOTZ
+#define CONFIG_BOOT_ATF
+# define ATF_ENTRY_ADDR  (0x08400000)
+# define OPTEE_LOAD_ADDR (ATF_ENTRY_ADDR + 0x20000)
 
 /* Devices */
 /* GPIO */
